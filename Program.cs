@@ -18,8 +18,8 @@ namespace V2DDISKRETKA
             int[] E = new int[1];
             int[] F = new int[1];
             B[0] = 0;
-            B[1] = 4;
-            bool eseky = true, work = false;
+            B[1] = 1;
+            bool eseky = true, work = false, message = false;
             for (i = 0; i < N; i++) // Заповнення А массиву
             {
                 A[i] = x;
@@ -53,7 +53,7 @@ namespace V2DDISKRETKA
                 eseky = false;
                 work = true;
             }
-            while (work)
+            while (work) // Перевірка
             {
                 for (i = 0; i < C.Length; i++)
                 {
@@ -65,9 +65,9 @@ namespace V2DDISKRETKA
             }
             for (i = 0; i < A.Length; i++)  // Заповнення массиву E
             { 
-            Array.Resize(ref E, E.Length + 1);
-            if (A[i] != D[0])
-                E[i] = A[i];
+                Array.Resize(ref E, E.Length + 1);
+                if (A[i] != D[0])
+                    E[i] = A[i];
             }
             for (i = 0; i < B.Length; i++) // Заповнення массиву F 
             {
@@ -75,6 +75,11 @@ namespace V2DDISKRETKA
                 if (B[i] != D[0])
                     F[i] = B[i];
             }
+            Array.Resize(ref E, E.Length - 1);
+            Array.Resize(ref F, F.Length - 1);
+            Array.Resize(ref D, D.Length - 1);
+            if (D.Length == 0)
+                message = true;
             Console.Write("Множина А: ");
             foreach (int a in A)
                 Console.Write(a + ", ");
@@ -90,6 +95,11 @@ namespace V2DDISKRETKA
             Console.Write("Множина D: ");
             foreach (int d in D)
                 Console.Write(d + ", ");
+            while (message)
+            {
+                Console.Write("не має елементiв.");
+                message = false;
+            }
             Console.WriteLine();
             Console.Write("Множина E: ");
             foreach (int e in E)
